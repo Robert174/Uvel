@@ -27,12 +27,4 @@ class RequestManager {
             }
         }
     }
-    
-    func parseData(data: Response) {
-        
-        for elem in 0 ... data.data.schema.count{
-            
-        }
-        
-    }
 }

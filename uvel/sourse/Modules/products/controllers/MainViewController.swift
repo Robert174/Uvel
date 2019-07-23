@@ -12,20 +12,19 @@ protocol GoToScreenDelegate {
     func GoToScreen(screenNumber: Int)
 }
 
-class MainViewController: UIViewController, UISearchBarDelegate {
+class MainViewController: UIViewController {
     
     var horizontalBarLeftAncorConstraint: NSLayoutConstraint?
     let selectedIndexPath = NSIndexPath(item: 0, section: 0)
     let horizontalBarView = UIView()
     var coordX: Int = 15
-    var previousId = 0
+    var lastId = Int()
     var goToScreenDelegate: GoToScreenDelegate?
     
     var cellWidth = [Int]() {
         didSet {
             initColectionView()
             colectionView.delegate = self
-            searchBar.delegate = self
             setupHorizontalBar(itemNumber: 0)
         }
     }
@@ -36,6 +35,14 @@ class MainViewController: UIViewController, UISearchBarDelegate {
             initCellWidth()
         }
     }
+    
+    let searchData = ["New York, NY", "Los Angeles, CA", "Chicago, IL", "Houston, TX",
+                "Philadelphia, PA", "Phoenix, AZ", "San Diego, CA", "San Antonio, TX",
+                "Dallas, TX", "Detroit, MI", "San Jose, CA", "Indianapolis, IN",
+                "Jacksonville, FL", "San Francisco, CA", "Columbus, OH", "Austin, TX",
+                "Memphis, TN", "Baltimore, MD", "Charlotte, ND", "Fort Worth, TX"]
+    
+    var filteredSearchData: [String]!
     
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -56,11 +63,21 @@ class MainViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    @IBOutlet weak var searchTableView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
+        filteredSearchData = searchData
+        
+        let controller = storyboard?.instantiateViewController(withIdentifier: "ViewControllerId") as! ViewController
+        let searchController = UISearchController(searchResultsController: controller)
+        searchController.definesPresentationContext = true
+        
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+    
     }
     
     
@@ -71,12 +88,9 @@ class MainViewController: UIViewController, UISearchBarDelegate {
     }
     
     func initNavController() {
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9733332992, green: 0.9685285687, blue: 0.9598152041, alpha: 1)
-        //        navigationController?.hidesBarsOnSwipe = true
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationItem.title = "Отчет"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+
+        
+
     }
     
     func getData() {
@@ -91,12 +105,21 @@ class MainViewController: UIViewController, UISearchBarDelegate {
         horizontalBarView.backgroundColor = UIColor.red
         horizontalBarView.frame = CGRect(x: coordX + 9 * itemNumber, y: 45, width: cellWidth[itemNumber], height: 2)
     }
+    
+    
+    func scrollToNextCell(id: Int){
+        if let coll = colectionView {
+            let indexPath = IndexPath(row: id, section: 0)
+            coll.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+    }
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
     func initColectionView() {
+        colectionView.showsHorizontalScrollIndicator = false
         colectionView.delegate = self
         colectionView.dataSource = self
         colectionView.selectItem(at: selectedIndexPath as IndexPath, animated: false, scrollPosition: [])
@@ -128,29 +151,16 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var x = 15
-        if indexPath.item != 0 {
-            for i in 0 ... indexPath.item - 1 {
-                x += cellWidth[i]
-            }
-            coordX = x
-        } else {
-            coordX = 15
-        }
+        calculateSize(id: indexPath.item)
+        let lastIndexPath = IndexPath(row: lastId, section: 0)
         setupHorizontalBar(itemNumber: indexPath.item)
         colectionView.cellForItem(at: indexPath)?.isSelected = true
+        colectionView.cellForItem(at: lastIndexPath)?.isSelected = false
+        lastId = indexPath.item
         goToScreenDelegate?.GoToScreen(screenNumber: indexPath.item)
     }
-}
-
-extension ViewController: UISearchBarDelegate  {
     
-}
-
-extension MainViewController: swipePCDelegate {
-    
-    func didSwiped(id: Int) {
-        
+    func calculateSize(id: Int) {
         var x = 15
         if id != 0 {
             for i in 0 ... id - 1 {
@@ -160,7 +170,41 @@ extension MainViewController: swipePCDelegate {
         } else {
             coordX = 15
         }
-        setupHorizontalBar(itemNumber: id)
-        
+        scrollToNextCell(id: id)
     }
 }
+
+extension MainViewController: UISearchBarDelegate  {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.filteredSearchData = searchText.isEmpty ? self.searchData : self.searchData.filter { (item: String) -> Bool in
+            return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+    }
+}
+
+extension MainViewController: swipePCDelegate {
+    
+    func didSwiped(id: Int) {
+        let indexPath = IndexPath(row: id, section: 0)
+        let lastIndexPath = IndexPath(row: lastId, section: 0)
+        calculateSize(id: id)
+        
+        setupHorizontalBar(itemNumber: id)
+        colectionView.cellForItem(at: lastIndexPath)?.isSelected = false
+        colectionView.cellForItem(at: indexPath)?.isSelected = true
+        lastId = id
+    }
+}
+
+//extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return self.filteredSearchData.count
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell")
+//        cell.label.text = self.filteredSearchData[indexPath.row]
+//    }
+//    
+//    
+//}

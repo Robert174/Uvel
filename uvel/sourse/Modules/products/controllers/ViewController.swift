@@ -12,7 +12,6 @@ import SwiftyJSON
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    var tableViewData = [SectionObject]()
     var categoryIndex = 0
     var categoryNameArr = [String]()
     var jsonObj = JSON()

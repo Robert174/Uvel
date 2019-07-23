@@ -18,11 +18,7 @@ class PageViewController: UIPageViewController {
     var currentIndex = 0
     var controllers = [ViewController]()
     var delegate1: swipePCDelegate?
-    var nextIndex = Int()
-    var isNext = Bool()
-    
-    var prevCategoryIndex = 0
-    
+  
     var response: Response? {
         didSet {
             self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width + 40, height: self.view.frame.size.height - 120);
@@ -32,7 +28,6 @@ class PageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
-    
         dataSource = self
         reloadData()
     }
@@ -52,10 +47,6 @@ class PageViewController: UIPageViewController {
         }
     }
     
-    @objc func leftSwipe() {
-        
-    }
-    
     func initController(index: Int) -> ViewController {
         let controller = storyboard?.instantiateViewController(withIdentifier: "ViewControllerId") as! ViewController
         controller.categoryIndex = index
@@ -64,18 +55,7 @@ class PageViewController: UIPageViewController {
     }
 }
 
-extension PageViewController: UIPageViewControllerDelegate, GoToScreenDelegate {
-    
-    func GoToScreen(screenNumber: Int) {
-        if categoryIndex > screenNumber {
-            self.setViewControllers([self.controllers[screenNumber]], direction: .reverse, animated: true, completion: nil)
-            categoryIndex = screenNumber
-        } else {
-            self.setViewControllers([self.controllers[screenNumber]], direction: .forward, animated: true, completion: nil)
-            categoryIndex = screenNumber
-        }
-        
-    }
+extension PageViewController: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         delegate1?.didSwiped(id: (pageViewController.viewControllers?.first!.view.tag)!)
@@ -85,10 +65,9 @@ extension PageViewController: UIPageViewControllerDelegate, GoToScreenDelegate {
 extension PageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        prevCategoryIndex = (viewController as! ViewController).categoryIndex - 1
+        let prevCategoryIndex = (viewController as! ViewController).categoryIndex - 1
         if prevCategoryIndex >= 0 {
             currentIndex = controllers[prevCategoryIndex].categoryIndex
-            isNext = false
             return controllers[prevCategoryIndex]
         }
         return nil
@@ -98,9 +77,21 @@ extension PageViewController: UIPageViewControllerDataSource {
         let nextCategoryIndex = (viewController as! ViewController).categoryIndex + 1
         if nextCategoryIndex < controllers.count {
             currentIndex = controllers[nextCategoryIndex].categoryIndex
-            isNext = true
             return controllers[nextCategoryIndex]
         }
         return nil
+    }
+}
+
+extension PageViewController: GoToScreenDelegate {
+    
+    func GoToScreen(screenNumber: Int) {
+        if categoryIndex > screenNumber {
+            self.setViewControllers([self.controllers[screenNumber]], direction: .reverse, animated: true, completion: nil)
+            categoryIndex = screenNumber
+        } else {
+            self.setViewControllers([self.controllers[screenNumber]], direction: .forward, animated: true, completion: nil)
+            categoryIndex = screenNumber
+        }
     }
 }

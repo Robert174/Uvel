@@ -88,13 +88,11 @@ class MainViewController: UIViewController {
     }
     
     func initNavController() {
-
-        
-
+        self.navigationController?.navigationBar.backgroundColor = ProductsColors.navBarColor
     }
     
     func getData() {
-        RequestManager().getSchema { (response) in
+        ProductsInteractor().getSchema { (response) in
             self.response = response
         }
     }
@@ -102,7 +100,7 @@ class MainViewController: UIViewController {
     func setupHorizontalBar(itemNumber: Int) {
         colectionView.addSubview(horizontalBarView)
         horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalBarView.backgroundColor = UIColor.red
+        horizontalBarView.backgroundColor = ProductsColors.selectedColor
         horizontalBarView.frame = CGRect(x: coordX + 9 * itemNumber, y: 45, width: cellWidth[itemNumber], height: 2)
     }
     

@@ -33,7 +33,7 @@ class PageViewController: UIPageViewController {
     }
     
     func reloadData() {
-        RequestManager().getSchema { (response) in
+        ProductsInteractor().getSchema { (response) in
             self.response = response
             
             for i in 0 ... (response?.data.schema.count)! - 1 {

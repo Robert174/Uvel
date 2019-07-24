@@ -17,7 +17,7 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            categoryNameLabel.textColor = isSelected ? UIColor.red : UIColor.gray
+            categoryNameLabel.textColor = isSelected ? ProductsColors.selectedColor : ProductsColors.notSelectedColor
         }
     }
 }

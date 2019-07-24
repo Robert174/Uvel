@@ -16,7 +16,7 @@ class AuditPageViewController: UIPageViewController {
     
     var categoryIndex = Int()
     var currentIndex = 0
-    var controllers = [ViewController]()
+    var controllers = [AuditVCForTable]()
     var delegate1: swipePCDelegate?
   
     var response: Response? {
@@ -47,8 +47,8 @@ class AuditPageViewController: UIPageViewController {
         }
     }
     
-    func initController(index: Int) -> ViewController {
-        let controller = storyboard?.instantiateViewController(withIdentifier: "ViewControllerId") as! ViewController
+    func initController(index: Int) -> AuditVCForTable {
+        let controller = storyboard?.instantiateViewController(withIdentifier: "AuditVCForTableID") as! AuditVCForTable
         controller.categoryIndex = index
         
         return controller
@@ -65,7 +65,7 @@ extension AuditPageViewController: UIPageViewControllerDelegate {
 extension AuditPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ AuditPageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let prevCategoryIndex = (viewController as! ViewController).categoryIndex - 1
+        let prevCategoryIndex = (viewController as! AuditVCForTable).categoryIndex - 1
         if prevCategoryIndex >= 0 {
             currentIndex = controllers[prevCategoryIndex].categoryIndex
             return controllers[prevCategoryIndex]
@@ -74,7 +74,7 @@ extension AuditPageViewController: UIPageViewControllerDataSource {
     }
     
     func pageViewController(_ AuditPageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let nextCategoryIndex = (viewController as! ViewController).categoryIndex + 1
+        let nextCategoryIndex = (viewController as! AuditVCForTable).categoryIndex + 1
         if nextCategoryIndex < controllers.count {
             currentIndex = controllers[nextCategoryIndex].categoryIndex
             return controllers[nextCategoryIndex]

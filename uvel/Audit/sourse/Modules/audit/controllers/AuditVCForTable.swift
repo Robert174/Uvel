@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  AuditVCForTable.swift
 //  uvel
 //
 //  Created by Роберт Райсих on 17/07/2019.
@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate {
+class AuditVCForTable: UIViewController, UIGestureRecognizerDelegate {
     
     var categoryIndex = 0
     var categoryNameArr = [String]()
@@ -29,8 +29,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func configure() {
         
-        
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -44,7 +42,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
 
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension AuditVCForTable: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 48
@@ -108,7 +106,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ViewController: myTableDelegate {
+extension AuditVCForTable: myTableDelegate {
     
     func myTableDelegate(section: AuditSectionTableView) {
         let sections = IndexSet.init(integer: section.tag)
@@ -129,7 +127,7 @@ extension ViewController: myTableDelegate {
 
 
 
-extension ViewController: resizeCellDelegate {
+extension AuditVCForTable: resizeCellDelegate {
     
     func resizeCellDelegate(cell: AuditTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
@@ -146,7 +144,7 @@ extension ViewController: resizeCellDelegate {
 
 
 
-extension ViewController: switchValueDidChangedDelegate {
+extension AuditVCForTable: switchValueDidChangedDelegate {
     
     
     func switchValueDidChangedDelegate(cell: AuditTableViewCell) {

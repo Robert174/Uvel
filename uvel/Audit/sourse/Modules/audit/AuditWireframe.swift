@@ -14,7 +14,7 @@ class AuditWireframe {
     var initialViewController: UIViewController! {
         get {
             if _initialViewController == nil {
-                let mainController = AuditStoryboards.audit.instantiateViewController(withIdentifier: "AuditWrappingViewController") as! AuditWrappingViewController
+                let mainController = AuditStoryboards.audit.instantiateViewController(withIdentifier: "AuditWrappingViewControllerID") as! AuditWrappingViewController
                 _initialViewController = mainController
             }
             

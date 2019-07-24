@@ -71,7 +71,7 @@ class AuditWrappingViewController: UIViewController {
         getData()
         filteredSearchData = searchData
         
-        let controller = storyboard?.instantiateViewController(withIdentifier: "ViewControllerId") as! ViewController
+        let controller = storyboard?.instantiateViewController(withIdentifier: "AuditVCForTableID") as! AuditVCForTable
         let searchController = UISearchController(searchResultsController: controller)
         searchController.definesPresentationContext = true
         

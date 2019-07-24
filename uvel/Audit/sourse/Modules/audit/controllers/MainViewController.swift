@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var viewForTable: UIView! {
         didSet {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let sb = UIStoryboard(name: "Audit", bundle: nil)
             let pageViewController = sb.instantiateViewController(withIdentifier: "PageViewControllerID") as! PageViewController
             pageViewController.delegate1 = self
             self.goToScreenDelegate = pageViewController
@@ -88,7 +88,7 @@ class MainViewController: UIViewController {
     }
     
     func initNavController() {
-        self.navigationController?.navigationBar.backgroundColor = ProductsColors.navBarColor
+        self.navigationController?.navigationBar.backgroundColor = AuditColors.navBarColor
     }
     
     func getData() {
@@ -100,7 +100,7 @@ class MainViewController: UIViewController {
     func setupHorizontalBar(itemNumber: Int) {
         colectionView.addSubview(horizontalBarView)
         horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalBarView.backgroundColor = ProductsColors.selectedColor
+        horizontalBarView.backgroundColor = AuditColors.selectedColor
         horizontalBarView.frame = CGRect(x: coordX + 9 * itemNumber, y: 45, width: cellWidth[itemNumber], height: 2)
     }
     

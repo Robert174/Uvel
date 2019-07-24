@@ -15,7 +15,7 @@ class ProductsInteractor {
     let headers = ["device": "mobile", "x-token": "test_2196", "Content-Type": "application/json" ]
     
     func getSchema(completion: @escaping (_ response: Response?) -> Void) {
-        Alamofire.request(ProductsURL.schemaURL, method: .get, headers: headers).responseJSON {
+        Alamofire.request(AuditURL.schemaURL, method: .get, headers: headers).responseJSON {
             response in
             if response.result.isSuccess {
                 let result: Response = try! JSONDecoder().decode(Response.self, from: response.data!)

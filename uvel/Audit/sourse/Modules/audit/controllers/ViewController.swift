@@ -35,7 +35,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "SecondLevelTableViewCell", bundle: nil), forCellReuseIdentifier: "secondLevelCell")
-        tableView.register(UINib(nibName: "firstLevelTableViewCell", bundle: nil), forHeaderFooterViewReuseIdentifier: "firstLevelCell")
+        tableView.register(UINib(nibName: "AuditSectionTableView", bundle: nil), forHeaderFooterViewReuseIdentifier: "AuditSectionTableViewID")
         tableView.tableFooterView = UIView(frame: .zero)
         navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -71,7 +71,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "firstLevelCell") as! firstLevelTableViewCell
+        let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "AuditSectionTableViewID") as! AuditSectionTableView
         sectionView.delegate = self
         sectionView.label.text = self.response?.data.schema[categoryIndex].tradeMarks![section].tradeMarkName
         sectionView.tag = section
@@ -110,7 +110,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ViewController: myTableDelegate {
     
-    func myTableDelegate(section: firstLevelTableViewCell) {
+    func myTableDelegate(section: AuditSectionTableView) {
         let sections = IndexSet.init(integer: section.tag)
         if (response?.data.schema[categoryIndex].tradeMarks![section.tag].opened)! {
             section.disclosureButton.setImage(UIImage(named: "collapse.png"), for: .normal)

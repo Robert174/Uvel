@@ -1,5 +1,5 @@
 //
-//  firstLevelTableViewCell.swift
+//  AuditSectionTableView.swift
 //  uvel
 //
 //  Created by Роберт Райсих on 09/07/2019.
@@ -9,10 +9,10 @@
 import UIKit
 
 protocol myTableDelegate {
-    func myTableDelegate(section: firstLevelTableViewCell)
+    func myTableDelegate(section: AuditSectionTableView)
 }
 
-class firstLevelTableViewCell: UITableViewHeaderFooterView {
+class AuditSectionTableView: UITableViewHeaderFooterView {
     var delegate: myTableDelegate?
     
     @IBOutlet weak var label: UILabel!

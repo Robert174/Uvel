@@ -17,12 +17,10 @@
 		E16550D122D4B9AE00C2E350 /* AuditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550CF22D4B9AE00C2E350 /* AuditTableViewCell.swift */; };
 		E16550D222D4B9AE00C2E350 /* AuditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16550D022D4B9AE00C2E350 /* AuditTableViewCell.xib */; };
 		E16550EF22DC61BB00C2E350 /* ParseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550EE22DC61BB00C2E350 /* ParseData.swift */; };
-		E16550FE22DDFDAE00C2E350 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550FD22DDFDAE00C2E350 /* PageViewController.swift */; };
+		E16550FE22DDFDAE00C2E350 /* AuditPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550FD22DDFDAE00C2E350 /* AuditPageViewController.swift */; };
 		E165510022DE0A8800C2E350 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550FF22DE0A8800C2E350 /* MainViewController.swift */; };
 		E165510422DEEF9200C2E350 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E165510322DEEF9200C2E350 /* ViewController.swift */; };
 		E1F815E922DFF93B002943C4 /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F815E822DFF93B002943C4 /* CategoriesCollectionViewCell.swift */; };
-		E1F815EF22E5E135002943C4 /* SearchCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F815ED22E5E135002943C4 /* SearchCellTableViewCell.swift */; };
-		E1F815F022E5E135002943C4 /* SearchCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F815EE22E5E135002943C4 /* SearchCellTableViewCell.xib */; };
 		E1F8161122E737ED002943C4 /* ProductsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161022E737ED002943C4 /* ProductsInteractor.swift */; };
 		E1F8161322E73895002943C4 /* ProductsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161222E73895002943C4 /* ProductsWireframe.swift */; };
 		E1F8162022E73DA7002943C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161F22E73DA7002943C4 /* Constants.swift */; };
@@ -43,12 +41,10 @@
 		E16550CF22D4B9AE00C2E350 /* AuditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditTableViewCell.swift; sourceTree = "<group>"; };
 		E16550D022D4B9AE00C2E350 /* AuditTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuditTableViewCell.xib; sourceTree = "<group>"; };
 		E16550EE22DC61BB00C2E350 /* ParseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseData.swift; sourceTree = "<group>"; };
-		E16550FD22DDFDAE00C2E350 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		E16550FD22DDFDAE00C2E350 /* AuditPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditPageViewController.swift; sourceTree = "<group>"; };
 		E16550FF22DE0A8800C2E350 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E165510322DEEF9200C2E350 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E1F815E822DFF93B002943C4 /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
-		E1F815ED22E5E135002943C4 /* SearchCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellTableViewCell.swift; sourceTree = "<group>"; };
-		E1F815EE22E5E135002943C4 /* SearchCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCellTableViewCell.xib; sourceTree = "<group>"; };
 		E1F8161022E737ED002943C4 /* ProductsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsInteractor.swift; sourceTree = "<group>"; };
 		E1F8161222E73895002943C4 /* ProductsWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsWireframe.swift; sourceTree = "<group>"; };
 		E1F8161F22E73DA7002943C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = uvel/supportingFiles/Constants.swift; sourceTree = SOURCE_ROOT; };
@@ -185,7 +181,7 @@
 		E1F815FC22E6DE37002943C4 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E16550FD22DDFDAE00C2E350 /* PageViewController.swift */,
+				E16550FD22DDFDAE00C2E350 /* AuditPageViewController.swift */,
 				E16550FF22DE0A8800C2E350 /* MainViewController.swift */,
 				E165510322DEEF9200C2E350 /* ViewController.swift */,
 			);
@@ -195,8 +191,6 @@
 		E1F815FD22E6E2B1002943C4 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				E1F815ED22E5E135002943C4 /* SearchCellTableViewCell.swift */,
-				E1F815EE22E5E135002943C4 /* SearchCellTableViewCell.xib */,
 				E16550C022D4B36D00C2E350 /* AuditSectionTableView.swift */,
 				E16550C122D4B36D00C2E350 /* AuditSectionTableView.xib */,
 				E16550CF22D4B9AE00C2E350 /* AuditTableViewCell.swift */,
@@ -279,7 +273,6 @@
 				E16550D222D4B9AE00C2E350 /* AuditTableViewCell.xib in Resources */,
 				E16550B822D4ADF300C2E350 /* LaunchScreen.storyboard in Resources */,
 				E16550B522D4ADF300C2E350 /* Assets.xcassets in Resources */,
-				E1F815F022E5E135002943C4 /* SearchCellTableViewCell.xib in Resources */,
 				E16550B322D4ADF300C2E350 /* Audit.storyboard in Resources */,
 				E16550C322D4B36D00C2E350 /* AuditSectionTableView.xib in Resources */,
 			);
@@ -335,14 +328,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E16550D122D4B9AE00C2E350 /* AuditTableViewCell.swift in Sources */,
-				E1F815EF22E5E135002943C4 /* SearchCellTableViewCell.swift in Sources */,
 				E165510422DEEF9200C2E350 /* ViewController.swift in Sources */,
 				E16550C222D4B36D00C2E350 /* AuditSectionTableView.swift in Sources */,
 				E1F815E922DFF93B002943C4 /* CategoriesCollectionViewCell.swift in Sources */,
 				E16550EF22DC61BB00C2E350 /* ParseData.swift in Sources */,
 				E1F8161322E73895002943C4 /* ProductsWireframe.swift in Sources */,
 				E1F8162022E73DA7002943C4 /* Constants.swift in Sources */,
-				E16550FE22DDFDAE00C2E350 /* PageViewController.swift in Sources */,
+				E16550FE22DDFDAE00C2E350 /* AuditPageViewController.swift in Sources */,
 				E1F8161122E737ED002943C4 /* ProductsInteractor.swift in Sources */,
 				E16550AE22D4ADF300C2E350 /* AppDelegate.swift in Sources */,
 				E165510022DE0A8800C2E350 /* MainViewController.swift in Sources */,

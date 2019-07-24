@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  AuditWrappingViewController.swift
 //  uvel
 //
 //  Created by Роберт Райсих on 16/07/2019.
@@ -12,7 +12,7 @@ protocol GoToScreenDelegate {
     func GoToScreen(screenNumber: Int)
 }
 
-class MainViewController: UIViewController {
+class AuditWrappingViewController: UIViewController {
     
     var horizontalBarLeftAncorConstraint: NSLayoutConstraint?
     let selectedIndexPath = NSIndexPath(item: 0, section: 0)
@@ -49,7 +49,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var viewForTable: UIView! {
         didSet {
             let sb = UIStoryboard(name: "Audit", bundle: nil)
-            let pageViewController = sb.instantiateViewController(withIdentifier: "PageViewControllerID") as! PageViewController
+            let pageViewController = sb.instantiateViewController(withIdentifier: "AuditPageViewControllerID") as! AuditPageViewController
             pageViewController.delegate1 = self
             self.goToScreenDelegate = pageViewController
             self.addChild(pageViewController)
@@ -113,7 +113,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension AuditWrappingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
     func initColectionView() {
@@ -172,7 +172,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-extension MainViewController: UISearchBarDelegate  {
+extension AuditWrappingViewController: UISearchBarDelegate  {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.filteredSearchData = searchText.isEmpty ? self.searchData : self.searchData.filter { (item: String) -> Bool in
             return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -180,7 +180,7 @@ extension MainViewController: UISearchBarDelegate  {
     }
 }
 
-extension MainViewController: swipePCDelegate {
+extension AuditWrappingViewController: swipePCDelegate {
     
     func didSwiped(id: Int) {
         let indexPath = IndexPath(row: id, section: 0)

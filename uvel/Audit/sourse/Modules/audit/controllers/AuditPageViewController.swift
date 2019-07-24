@@ -1,5 +1,5 @@
 //
-//  PageViewController.swift
+//  AuditPageViewController.swift
 //  uvel
 //
 //  Created by Роберт Райсих on 16/07/2019.
@@ -12,7 +12,7 @@ protocol swipePCDelegate {
     func didSwiped(id: Int)
 }
 
-class PageViewController: UIPageViewController {
+class AuditPageViewController: UIPageViewController {
     
     var categoryIndex = Int()
     var currentIndex = 0
@@ -55,16 +55,16 @@ class PageViewController: UIPageViewController {
     }
 }
 
-extension PageViewController: UIPageViewControllerDelegate {
+extension AuditPageViewController: UIPageViewControllerDelegate {
     
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        delegate1?.didSwiped(id: (pageViewController.viewControllers?.first!.view.tag)!)
+    func pageViewController(_ AuditPageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        delegate1?.didSwiped(id: (AuditPageViewController.viewControllers?.first!.view.tag)!)
     }
 }
 
-extension PageViewController: UIPageViewControllerDataSource {
+extension AuditPageViewController: UIPageViewControllerDataSource {
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ AuditPageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let prevCategoryIndex = (viewController as! ViewController).categoryIndex - 1
         if prevCategoryIndex >= 0 {
             currentIndex = controllers[prevCategoryIndex].categoryIndex
@@ -73,7 +73,7 @@ extension PageViewController: UIPageViewControllerDataSource {
         return nil
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ AuditPageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let nextCategoryIndex = (viewController as! ViewController).categoryIndex + 1
         if nextCategoryIndex < controllers.count {
             currentIndex = controllers[nextCategoryIndex].categoryIndex
@@ -83,7 +83,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
 }
 
-extension PageViewController: GoToScreenDelegate {
+extension AuditPageViewController: GoToScreenDelegate {
     
     func GoToScreen(screenNumber: Int) {
         if categoryIndex > screenNumber {

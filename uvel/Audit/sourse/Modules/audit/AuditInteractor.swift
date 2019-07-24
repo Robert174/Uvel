@@ -1,5 +1,5 @@
 //
-//  ProductsInteractor.swift
+//  AuditInteractor.swift
 //  uvel
 //
 //  Created by Роберт Райсих on 23/07/2019.
@@ -9,9 +9,9 @@
 import Foundation
 import Alamofire
 
-class ProductsInteractor {
+class AuditInteractor {
     
-    var wireframe: ProductsWireframe?
+    var wireframe: AuditWireframe?
     let headers = ["device": "mobile", "x-token": "test_2196", "Content-Type": "application/json" ]
     
     func getSchema(completion: @escaping (_ response: Response?) -> Void) {

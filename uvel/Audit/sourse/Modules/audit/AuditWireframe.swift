@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ProductsWireframe {
+class AuditWireframe {
     
     final weak var _initialViewController: UIViewController?
     var initialViewController: UIViewController! {
@@ -30,7 +30,7 @@ class ProductsWireframe {
     var interactor: Any? {
         get {
             if _interactor == nil {
-                let interactor = ProductsInteractor()
+                let interactor = AuditInteractor()
                 interactor.wireframe = self
                 _interactor = interactor
             }

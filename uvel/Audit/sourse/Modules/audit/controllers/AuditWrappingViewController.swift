@@ -92,7 +92,7 @@ class AuditWrappingViewController: UIViewController {
     }
     
     func getData() {
-        ProductsInteractor().getSchema { (response) in
+        AuditInteractor().getSchema { (response) in
             self.response = response
         }
     }

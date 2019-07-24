@@ -33,7 +33,7 @@ class AuditPageViewController: UIPageViewController {
     }
     
     func reloadData() {
-        ProductsInteractor().getSchema { (response) in
+        AuditInteractor().getSchema { (response) in
             self.response = response
             
             for i in 0 ... (response?.data.schema.count)! - 1 {

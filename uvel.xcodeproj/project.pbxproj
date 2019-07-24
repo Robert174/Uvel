@@ -26,7 +26,6 @@
 		E1F8161122E737ED002943C4 /* ProductsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161022E737ED002943C4 /* ProductsInteractor.swift */; };
 		E1F8161322E73895002943C4 /* ProductsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161222E73895002943C4 /* ProductsWireframe.swift */; };
 		E1F8162022E73DA7002943C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161F22E73DA7002943C4 /* Constants.swift */; };
-		E1F8162422E820F2002943C4 /* Wireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162322E820F2002943C4 /* Wireframe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,8 +51,7 @@
 		E1F815EE22E5E135002943C4 /* SearchCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCellTableViewCell.xib; sourceTree = "<group>"; };
 		E1F8161022E737ED002943C4 /* ProductsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsInteractor.swift; sourceTree = "<group>"; };
 		E1F8161222E73895002943C4 /* ProductsWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsWireframe.swift; sourceTree = "<group>"; };
-		E1F8161F22E73DA7002943C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = uvel/Products/Module/Constants.swift; sourceTree = SOURCE_ROOT; };
-		E1F8162322E820F2002943C4 /* Wireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wireframe.swift; sourceTree = "<group>"; };
+		E1F8161F22E73DA7002943C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = uvel/supportingFiles/Constants.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,10 +104,9 @@
 		E16550AC22D4ADF300C2E350 /* uvel */ = {
 			isa = PBXGroup;
 			children = (
-				E1F8162222E820CB002943C4 /* Module */,
-				E1F8161422E73932002943C4 /* Products */,
-				E16550AD22D4ADF300C2E350 /* AppDelegate.swift */,
+				E1F8161422E73932002943C4 /* Audit */,
 				E16550B422D4ADF300C2E350 /* Assets.xcassets */,
+				E16550AD22D4ADF300C2E350 /* AppDelegate.swift */,
 				E16550B922D4ADF300C2E350 /* Info.plist */,
 			);
 			path = uvel;
@@ -154,7 +151,7 @@
 		E1F815F622E6D206002943C4 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				E1F815FB22E6DE0E002943C4 /* products */,
+				E1F815FB22E6DE0E002943C4 /* audit */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -174,7 +171,7 @@
 			path = realm;
 			sourceTree = "<group>";
 		};
-		E1F815FB22E6DE0E002943C4 /* products */ = {
+		E1F815FB22E6DE0E002943C4 /* audit */ = {
 			isa = PBXGroup;
 			children = (
 				E1F815FD22E6E2B1002943C4 /* views */,
@@ -182,7 +179,7 @@
 				E1F8161022E737ED002943C4 /* ProductsInteractor.swift */,
 				E1F8161222E73895002943C4 /* ProductsWireframe.swift */,
 			);
-			path = products;
+			path = audit;
 			sourceTree = "<group>";
 		};
 		E1F815FC22E6DE37002943C4 /* controllers */ = {
@@ -209,22 +206,14 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		E1F8161422E73932002943C4 /* Products */ = {
+		E1F8161422E73932002943C4 /* Audit */ = {
 			isa = PBXGroup;
 			children = (
 				E1F815F222E6D13B002943C4 /* storyboards */,
 				E1F815F122E6D124002943C4 /* sourse */,
 				E1F815F422E6D17F002943C4 /* supportingFiles */,
 			);
-			path = Products;
-			sourceTree = "<group>";
-		};
-		E1F8162222E820CB002943C4 /* Module */ = {
-			isa = PBXGroup;
-			children = (
-				E1F8162322E820F2002943C4 /* Wireframe.swift */,
-			);
-			path = Module;
+			path = Audit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,7 +340,6 @@
 				E16550C222D4B36D00C2E350 /* firstLevelTableViewCell.swift in Sources */,
 				E1F815E922DFF93B002943C4 /* CategoriesCollectionViewCell.swift in Sources */,
 				E16550EF22DC61BB00C2E350 /* ParseData.swift in Sources */,
-				E1F8162422E820F2002943C4 /* Wireframe.swift in Sources */,
 				E1F8161322E73895002943C4 /* ProductsWireframe.swift in Sources */,
 				E1F8162022E73DA7002943C4 /* Constants.swift in Sources */,
 				E16550FE22DDFDAE00C2E350 /* PageViewController.swift in Sources */,

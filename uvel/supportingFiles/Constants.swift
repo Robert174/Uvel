@@ -20,5 +20,5 @@ struct ProductsURL {
 }
 
 struct ProductsStoryboards {
-    static let main = UIStoryboard(name: "main", bundle: nil)
+    static let main = UIStoryboard(name: "Main", bundle: nil)
 }

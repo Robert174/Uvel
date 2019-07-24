@@ -108,8 +108,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
-
 extension ViewController: myTableDelegate {
     
     func myTableDelegate(section: firstLevelTableViewCell) {

@@ -11,6 +11,7 @@ import Alamofire
 
 class ProductsInteractor {
     
+    var wireframe: ProductsWireframe?
     let headers = ["device": "mobile", "x-token": "test_2196", "Content-Type": "application/json" ]
     
     func getSchema(completion: @escaping (_ response: Response?) -> Void) {

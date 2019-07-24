@@ -13,7 +13,7 @@
         <!--Main View Controller-->
         <scene sceneID="RVV-ZF-PZ3">
             <objects>
-                <viewController id="Stg-t3-6tM" customClass="MainViewController" customModule="uvel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainViewController" id="Stg-t3-6tM" customClass="MainViewController" customModule="uvel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tJL-vF-fTr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

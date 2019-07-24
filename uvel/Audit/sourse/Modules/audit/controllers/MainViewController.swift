@@ -193,16 +193,3 @@ extension MainViewController: swipePCDelegate {
         lastId = id
     }
 }
-
-//extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.filteredSearchData.count
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell")
-//        cell.label.text = self.filteredSearchData[indexPath.row]
-//    }
-//    
-//    
-//}

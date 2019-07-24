@@ -34,7 +34,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(UINib(nibName: "SecondLevelTableViewCell", bundle: nil), forCellReuseIdentifier: "secondLevelCell")
+        tableView.register(UINib(nibName: "AuditTableViewCell", bundle: nil), forCellReuseIdentifier: "AuditTableViewCellID")
         tableView.register(UINib(nibName: "AuditSectionTableView", bundle: nil), forHeaderFooterViewReuseIdentifier: "AuditSectionTableViewID")
         tableView.tableFooterView = UIView(frame: .zero)
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -86,7 +86,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "secondLevelCell", for: indexPath) as! SecondLevelTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AuditTableViewCellID", for: indexPath) as! AuditTableViewCell
         
         let cellModel = self.response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row]
         cell.label.text = cellModel?.productName
@@ -131,7 +131,7 @@ extension ViewController: myTableDelegate {
 
 extension ViewController: resizeCellDelegate {
     
-    func resizeCellDelegate(cell: SecondLevelTableViewCell) {
+    func resizeCellDelegate(cell: AuditTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         
         let value = response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row].opened
@@ -149,7 +149,7 @@ extension ViewController: resizeCellDelegate {
 extension ViewController: switchValueDidChangedDelegate {
     
     
-    func switchValueDidChangedDelegate(cell: SecondLevelTableViewCell) {
+    func switchValueDidChangedDelegate(cell: AuditTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         
         let value = response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row].switchOn

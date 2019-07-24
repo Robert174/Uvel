@@ -1,5 +1,5 @@
 //
-//  SecondLevelTableViewCell.swift
+//  AuditTableViewCell.swift
 //  uvel
 //
 //  Created by Роберт Райсих on 09/07/2019.
@@ -9,14 +9,14 @@
 import UIKit
 
 protocol resizeCellDelegate {
-    func resizeCellDelegate(cell: SecondLevelTableViewCell)
+    func resizeCellDelegate(cell: AuditTableViewCell)
 }
 
 protocol switchValueDidChangedDelegate {
-    func switchValueDidChangedDelegate(cell: SecondLevelTableViewCell)
+    func switchValueDidChangedDelegate(cell: AuditTableViewCell)
 }
 
-class SecondLevelTableViewCell: UITableViewCell {
+class AuditTableViewCell: UITableViewCell {
     
     var delegate: resizeCellDelegate?
     var delegate2: switchValueDidChangedDelegate?

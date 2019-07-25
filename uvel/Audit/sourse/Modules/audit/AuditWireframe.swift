@@ -26,22 +26,4 @@ class AuditWireframe {
         }
     }
     
-    final weak var _interactor: AnyObject?
-    var interactor: Any? {
-        get {
-            if _interactor == nil {
-                let interactor = AuditInteractor()
-                interactor.wireframe = self
-                _interactor = interactor
-            }
-            return _interactor
-        }
-        
-        set {
-            fatalError()
-        }
-    }
-    
-    
-    
 }

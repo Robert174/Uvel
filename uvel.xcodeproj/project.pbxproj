@@ -24,6 +24,7 @@
 		E1F8161122E737ED002943C4 /* AuditInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161022E737ED002943C4 /* AuditInteractor.swift */; };
 		E1F8161322E73895002943C4 /* AuditWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161222E73895002943C4 /* AuditWireframe.swift */; };
 		E1F8162022E73DA7002943C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161F22E73DA7002943C4 /* Constants.swift */; };
+		E1F8162622E87568002943C4 /* AuditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162522E87568002943C4 /* AuditViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		E1F8161022E737ED002943C4 /* AuditInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditInteractor.swift; sourceTree = "<group>"; };
 		E1F8161222E73895002943C4 /* AuditWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditWireframe.swift; sourceTree = "<group>"; };
 		E1F8161F22E73DA7002943C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = uvel/supportingFiles/Constants.swift; sourceTree = SOURCE_ROOT; };
+		E1F8162522E87568002943C4 /* AuditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				E1F815FC22E6DE37002943C4 /* controllers */,
 				E1F8161022E737ED002943C4 /* AuditInteractor.swift */,
 				E1F8161222E73895002943C4 /* AuditWireframe.swift */,
+				E1F8162522E87568002943C4 /* AuditViewModel.swift */,
 			);
 			path = audit;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				E16550FE22DDFDAE00C2E350 /* AuditPageViewController.swift in Sources */,
 				E1F8161122E737ED002943C4 /* AuditInteractor.swift in Sources */,
 				E16550AE22D4ADF300C2E350 /* AppDelegate.swift in Sources */,
+				E1F8162622E87568002943C4 /* AuditViewModel.swift in Sources */,
 				E165510022DE0A8800C2E350 /* AuditWrappingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -25,6 +25,7 @@
 		E1F8161322E73895002943C4 /* AuditWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161222E73895002943C4 /* AuditWireframe.swift */; };
 		E1F8162022E73DA7002943C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161F22E73DA7002943C4 /* Constants.swift */; };
 		E1F8162622E87568002943C4 /* AuditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162522E87568002943C4 /* AuditViewModel.swift */; };
+		E1F8162822E9C5B2002943C4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162722E9C5B2002943C4 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		E1F8161222E73895002943C4 /* AuditWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditWireframe.swift; sourceTree = "<group>"; };
 		E1F8161F22E73DA7002943C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = uvel/supportingFiles/Constants.swift; sourceTree = SOURCE_ROOT; };
 		E1F8162522E87568002943C4 /* AuditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditViewModel.swift; sourceTree = "<group>"; };
+		E1F8162722E9C5B2002943C4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				E1F8161F22E73DA7002943C4 /* Constants.swift */,
+				E1F8162722E9C5B2002943C4 /* Extensions.swift */,
 			);
 			name = supportingFiles;
 			path = ../supportingFiles;
@@ -141,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				E1F815F822E6DB8B002943C4 /* inMemory */,
-				E1F815FA22E6DBBB002943C4 /* realm */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -160,13 +162,6 @@
 				E16550EE22DC61BB00C2E350 /* ParseData.swift */,
 			);
 			path = inMemory;
-			sourceTree = "<group>";
-		};
-		E1F815FA22E6DBBB002943C4 /* realm */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = realm;
 			sourceTree = "<group>";
 		};
 		E1F815FB22E6DE0E002943C4 /* audit */ = {
@@ -338,6 +333,7 @@
 				E1F8161322E73895002943C4 /* AuditWireframe.swift in Sources */,
 				E1F8162022E73DA7002943C4 /* Constants.swift in Sources */,
 				E16550FE22DDFDAE00C2E350 /* AuditPageViewController.swift in Sources */,
+				E1F8162822E9C5B2002943C4 /* Extensions.swift in Sources */,
 				E1F8161122E737ED002943C4 /* AuditInteractor.swift in Sources */,
 				E16550AE22D4ADF300C2E350 /* AppDelegate.swift in Sources */,
 				E1F8162622E87568002943C4 /* AuditViewModel.swift in Sources */,

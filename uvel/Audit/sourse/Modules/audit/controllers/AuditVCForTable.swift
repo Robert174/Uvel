@@ -12,11 +12,14 @@ import SwiftyJSON
 
 class AuditVCForTable: UIViewController, UIGestureRecognizerDelegate {
     
-    var categoryIndex = 0
+    var viewModel: AuditViewModel?
+    var categoryIndex = Int()
     var categoryNameArr = [String]()
     var jsonObj = JSON()
     var myCustomView = UIView()
-    var response: Response!
+    var response: Response? {
+        return self.viewModel?.response
+    }
     
     @IBOutlet weak var tableView: UITableView!
 

@@ -19,37 +19,24 @@ class AuditPageViewController: UIPageViewController {
     var controllers = [AuditVCForTable]()
     var delegate1: swipePCDelegate?
   
-    var response: Response? {
-        didSet {
-            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width + 40, height: self.view.frame.size.height - 120);
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
         dataSource = self
-        reloadData()
     }
     
-    func reloadData() {
-        AuditInteractor().getSchema { (response) in
-            self.response = response
-            
-            for i in 0 ... (response?.data.schema.count)! - 1 {
-                let controller = self.initController(index: i)
-                controller.response = response!
-                controller.view.tag = i
-                self.controllers.append(controller)
-            }
-            
-            self.setViewControllers([self.controllers.first!], direction: .forward, animated: true, completion: nil)
+    func setControllers(count: Int, viewModel: AuditViewModel) {
+        for i in 0 ... count - 1 {
+            let controller = self.initController(index: i, viewModel: viewModel)
+            self.controllers.append(controller)
         }
+        self.setViewControllers([self.controllers.first!], direction: .forward, animated: true, completion: nil)
     }
     
-    func initController(index: Int) -> AuditVCForTable {
+    func initController(index: Int, viewModel: AuditViewModel) -> AuditVCForTable {
         let controller = storyboard?.instantiateViewController(withIdentifier: "AuditVCForTableID") as! AuditVCForTable
         controller.categoryIndex = index
+        controller.viewModel = viewModel
         
         return controller
     }
@@ -58,7 +45,10 @@ class AuditPageViewController: UIPageViewController {
 extension AuditPageViewController: UIPageViewControllerDelegate {
     
     func pageViewController(_ AuditPageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        delegate1?.didSwiped(id: (AuditPageViewController.viewControllers?.first!.view.tag)!)
+        if let currentController = viewControllers?.first! as! AuditVCForTable? {
+            delegate1?.didSwiped(id: currentController.categoryIndex)
+        }
+        
     }
 }
 

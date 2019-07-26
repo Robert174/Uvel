@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct Response: Decodable {
+class Response: Decodable {
     var data: Data
     
     enum CodingKeys: String, CodingKey {
         case data
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         
@@ -23,21 +23,21 @@ struct Response: Decodable {
     }
 }
 
-struct Data: Decodable {
+class Data: Decodable {
     var schema: [Category]
     
     enum CodingKeys: String, CodingKey {
         case schema
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.schema = try container.decode([Category].self, forKey: .schema)
     }
 }
 
-struct Category: Decodable {
+class Category: Decodable {
     var categoryName: String?
     var tradeMarks: [TradeMark]?
     var isChosen: Bool = false
@@ -47,7 +47,7 @@ struct Category: Decodable {
         case tradeMarks
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.categoryName = try? container.decode(String.self, forKey: .categoryName)
@@ -55,7 +55,7 @@ struct Category: Decodable {
     }
 }
 
-struct TradeMark: Decodable {
+class TradeMark: Decodable {
     var tradeMarkName: String?
     var products: [Product]
     var opened: Bool = false
@@ -65,7 +65,7 @@ struct TradeMark: Decodable {
         case products
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.tradeMarkName = try? container.decode(String.self, forKey: .tradeMarkName)
@@ -73,7 +73,7 @@ struct TradeMark: Decodable {
     }
 }
 
-struct Product: Decodable {
+class Product: Decodable {
     var productName: String?
     var opened: Bool = false
     var switchOn: Bool = false
@@ -82,7 +82,7 @@ struct Product: Decodable {
         case productName
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.productName = try? container.decode(String.self, forKey: .productName)

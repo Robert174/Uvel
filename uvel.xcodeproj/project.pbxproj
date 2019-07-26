@@ -16,7 +16,7 @@
 		E16550C322D4B36D00C2E350 /* AuditSectionTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16550C122D4B36D00C2E350 /* AuditSectionTableView.xib */; };
 		E16550D122D4B9AE00C2E350 /* AuditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550CF22D4B9AE00C2E350 /* AuditTableViewCell.swift */; };
 		E16550D222D4B9AE00C2E350 /* AuditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16550D022D4B9AE00C2E350 /* AuditTableViewCell.xib */; };
-		E16550EF22DC61BB00C2E350 /* ParseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550EE22DC61BB00C2E350 /* ParseData.swift */; };
+		E16550EF22DC61BB00C2E350 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550EE22DC61BB00C2E350 /* Response.swift */; };
 		E16550FE22DDFDAE00C2E350 /* AuditPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550FD22DDFDAE00C2E350 /* AuditPageViewController.swift */; };
 		E165510022DE0A8800C2E350 /* AuditWrappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16550FF22DE0A8800C2E350 /* AuditWrappingViewController.swift */; };
 		E165510422DEEF9200C2E350 /* AuditVCForTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E165510322DEEF9200C2E350 /* AuditVCForTable.swift */; };
@@ -26,6 +26,10 @@
 		E1F8162022E73DA7002943C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8161F22E73DA7002943C4 /* Constants.swift */; };
 		E1F8162622E87568002943C4 /* AuditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162522E87568002943C4 /* AuditViewModel.swift */; };
 		E1F8162822E9C5B2002943C4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162722E9C5B2002943C4 /* Extensions.swift */; };
+		E1F8162A22EB1BCE002943C4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162922EB1BCE002943C4 /* Data.swift */; };
+		E1F8162C22EB1BFE002943C4 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162B22EB1BFE002943C4 /* Category.swift */; };
+		E1F8162E22EB1C1E002943C4 /* TradeMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162D22EB1C1E002943C4 /* TradeMark.swift */; };
+		E1F8163022EB1C40002943C4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8162F22EB1C40002943C4 /* Product.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +46,7 @@
 		E16550C122D4B36D00C2E350 /* AuditSectionTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuditSectionTableView.xib; sourceTree = "<group>"; };
 		E16550CF22D4B9AE00C2E350 /* AuditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditTableViewCell.swift; sourceTree = "<group>"; };
 		E16550D022D4B9AE00C2E350 /* AuditTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuditTableViewCell.xib; sourceTree = "<group>"; };
-		E16550EE22DC61BB00C2E350 /* ParseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseData.swift; sourceTree = "<group>"; };
+		E16550EE22DC61BB00C2E350 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		E16550FD22DDFDAE00C2E350 /* AuditPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditPageViewController.swift; sourceTree = "<group>"; };
 		E16550FF22DE0A8800C2E350 /* AuditWrappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditWrappingViewController.swift; sourceTree = "<group>"; };
 		E165510322DEEF9200C2E350 /* AuditVCForTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditVCForTable.swift; sourceTree = "<group>"; };
@@ -52,6 +56,10 @@
 		E1F8161F22E73DA7002943C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = uvel/supportingFiles/Constants.swift; sourceTree = SOURCE_ROOT; };
 		E1F8162522E87568002943C4 /* AuditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditViewModel.swift; sourceTree = "<group>"; };
 		E1F8162722E9C5B2002943C4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E1F8162922EB1BCE002943C4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		E1F8162B22EB1BFE002943C4 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		E1F8162D22EB1C1E002943C4 /* TradeMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMark.swift; sourceTree = "<group>"; };
+		E1F8162F22EB1C40002943C4 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +167,11 @@
 		E1F815F822E6DB8B002943C4 /* inMemory */ = {
 			isa = PBXGroup;
 			children = (
-				E16550EE22DC61BB00C2E350 /* ParseData.swift */,
+				E16550EE22DC61BB00C2E350 /* Response.swift */,
+				E1F8162922EB1BCE002943C4 /* Data.swift */,
+				E1F8162B22EB1BFE002943C4 /* Category.swift */,
+				E1F8162D22EB1C1E002943C4 /* TradeMark.swift */,
+				E1F8162F22EB1C40002943C4 /* Product.swift */,
 			);
 			path = inMemory;
 			sourceTree = "<group>";
@@ -329,12 +341,16 @@
 				E165510422DEEF9200C2E350 /* AuditVCForTable.swift in Sources */,
 				E16550C222D4B36D00C2E350 /* AuditSectionTableView.swift in Sources */,
 				E1F815E922DFF93B002943C4 /* CategoriesCollectionViewCell.swift in Sources */,
-				E16550EF22DC61BB00C2E350 /* ParseData.swift in Sources */,
+				E16550EF22DC61BB00C2E350 /* Response.swift in Sources */,
+				E1F8163022EB1C40002943C4 /* Product.swift in Sources */,
+				E1F8162E22EB1C1E002943C4 /* TradeMark.swift in Sources */,
 				E1F8161322E73895002943C4 /* AuditWireframe.swift in Sources */,
 				E1F8162022E73DA7002943C4 /* Constants.swift in Sources */,
+				E1F8162A22EB1BCE002943C4 /* Data.swift in Sources */,
 				E16550FE22DDFDAE00C2E350 /* AuditPageViewController.swift in Sources */,
 				E1F8162822E9C5B2002943C4 /* Extensions.swift in Sources */,
 				E1F8161122E737ED002943C4 /* AuditInteractor.swift in Sources */,
+				E1F8162C22EB1BFE002943C4 /* Category.swift in Sources */,
 				E16550AE22D4ADF300C2E350 /* AppDelegate.swift in Sources */,
 				E1F8162622E87568002943C4 /* AuditViewModel.swift in Sources */,
 				E165510022DE0A8800C2E350 /* AuditWrappingViewController.swift in Sources */,

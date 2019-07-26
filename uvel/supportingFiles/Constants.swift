@@ -30,5 +30,10 @@ struct AuditConstraints {
     
     static let collectionMinimumInteritemSpacingForSection: CGFloat = 15
     static let collectionCellHeight: CGFloat = 60
+    
+    //TableView
+    
+    static let heightForRow: CGFloat = 48
+    static let heightForSection: CGFloat = 60
 }
 

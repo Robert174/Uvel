@@ -24,10 +24,10 @@ class AuditVCForTable: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        configureTableView()
     }
     
-    func configure() {
+    func configureTableView() {
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -45,11 +45,11 @@ class AuditVCForTable: UIViewController, UIGestureRecognizerDelegate {
 extension AuditVCForTable: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 48
+        return AuditConstraints.heightForRow
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return AuditConstraints.heightForSection
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -57,7 +57,7 @@ extension AuditVCForTable: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (self.response?.data.schema[categoryIndex].tradeMarks!.count ?? 10)
+        return (self.response?.data.schema[categoryIndex].tradeMarks!.count ?? 0)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

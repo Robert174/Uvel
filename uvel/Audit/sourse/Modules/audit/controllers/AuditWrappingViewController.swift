@@ -15,6 +15,7 @@ protocol GoToScreenDelegate {
 class AuditWrappingViewController: UIViewController {
     
     var viewModel = AuditViewModel()
+    
     var pageViewController: AuditPageViewController = {
         let sb = UIStoryboard(name: "Audit", bundle: nil)
         let pageViewController = sb.instantiateViewController(withIdentifier: "AuditPageViewControllerID") as! AuditPageViewController
@@ -27,11 +28,8 @@ class AuditWrappingViewController: UIViewController {
         }
     }
     let horizontalBarView = UIView()
-    var coordX: Int = 20
-    var lastId: Int = 0
     var goToScreenDelegate: GoToScreenDelegate?
     
-    var filteredSearchData: [String]!
 
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var viewForTable: UIView! {
@@ -75,11 +73,10 @@ class AuditWrappingViewController: UIViewController {
             guard let self = self else {return}
             self.pageViewController.setControllers(count: response.data.schema.count, viewModel: self.viewModel)
             self.initColectionView()
-            
         }
         
         viewModel.calculateSizeHandler = { (id, coord) in
-            self.coordX = coord
+            self.viewModel.coordX = coord
             self.scrollToNextCell(id: id)
         }
         
@@ -87,36 +84,18 @@ class AuditWrappingViewController: UIViewController {
     }
     
     func setupHorizontalBar(itemNumber: Int) {
-        calculateSize(id: itemNumber)
+        viewModel.calculateSize(id: itemNumber, cellWidthArr: cellWidthArr)
         horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
         horizontalBarView.backgroundColor = AuditColors.selectedColor
         let width = cellWidthArr[itemNumber]
-        horizontalBarView.frame = CGRect(x: coordX, y: 45, width: Int(width) + 10, height: 2)
+        horizontalBarView.frame = CGRect(x: viewModel.coordX, y: 45, width: Int(width) + AuditConstraints.horizontalBarIndent, height: AuditConstraints.horizontalBarHeight)
         colectionView.addSubview(horizontalBarView)
     }
     
-    func calculateSize(id: Int) {
-        var x = 20
-        if id != 0 {
-            for i in 0 ... id - 1 {
-                x += Int(cellWidthArr[i]) + 15
-            }
-            coordX = x
-        } else {
-            coordX = 20
-        }
-    }
-    
-    
-    func scrollToNextCell(id: Int) {
-        if let coll = colectionView {
-            let indexPath = IndexPath(row: id, section: 0)
-            coll.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        }
-    }
 }
 
 extension AuditWrappingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     
     
     func initColectionView() {
@@ -126,18 +105,25 @@ extension AuditWrappingViewController: UICollectionViewDelegate, UICollectionVie
         colectionView.selectItem(at: viewModel.selectedIndexPath as IndexPath, animated: false, scrollPosition: [])
     }
     
+    func scrollToNextCell(id: Int) {
+        if let coll = colectionView {
+            let indexPath = IndexPath(row: id, section: 0)
+            coll.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         if let categoryName = viewModel.response.data.schema[indexPath.row].categoryName {
-            let width = categoryName.width(withConstrainedHeight: 60.0, font: UIFont.systemFont(ofSize: 17))
+            let width = categoryName.width(withConstrainedHeight: AuditConstraints.collectionCellHeight, font: UIFont.systemFont(ofSize: 17))
             self.cellWidthArr.append(width)
-            return CGSize(width: width, height: 60)
+            return CGSize(width: width, height: AuditConstraints.collectionCellHeight)
         }
         return .zero
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 15
+        return AuditConstraints.collectionMinimumInteritemSpacingForSection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -154,11 +140,11 @@ extension AuditWrappingViewController: UICollectionViewDelegate, UICollectionVie
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let lastIndexPath = IndexPath(row: lastId, section: 0)
+        let lastIndexPath = IndexPath(row: viewModel.lastId, section: 0)
         setupHorizontalBar(itemNumber: indexPath.item)
         colectionView.cellForItem(at: indexPath)?.isSelected = true
         colectionView.cellForItem(at: lastIndexPath)?.isSelected = false
-        lastId = indexPath.item
+        viewModel.lastId = indexPath.item
         goToScreenDelegate?.GoToScreen(screenNumber: indexPath.item)
         scrollToNextCell(id: indexPath.item)
     }
@@ -170,12 +156,12 @@ extension AuditWrappingViewController: swipePCDelegate {
     func didSwiped(id: Int) {
         
         let indexPath = IndexPath(row: id, section: 0)
-        let lastIndexPath = IndexPath(row: lastId, section: 0)
+        let lastIndexPath = IndexPath(row: viewModel.lastId, section: 0)
         
         setupHorizontalBar(itemNumber: id)
         colectionView.cellForItem(at: lastIndexPath)?.isSelected = false
         colectionView.cellForItem(at: indexPath)?.isSelected = true
-        lastId = id
+        viewModel.lastId = id
         scrollToNextCell(id: id)
     }
     

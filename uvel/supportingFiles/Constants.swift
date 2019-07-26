@@ -23,3 +23,12 @@ struct AuditStoryboards {
     static let audit = UIStoryboard(name: "Audit", bundle: nil)
 }
 
+struct AuditConstraints {
+    static let horizontalBarIndent = 10
+    static let leftIndentOfCV = 20
+    static let horizontalBarHeight = 2
+    
+    static let collectionMinimumInteritemSpacingForSection: CGFloat = 15
+    static let collectionCellHeight: CGFloat = 60
+}
+

@@ -13,10 +13,8 @@ import SwiftyJSON
 class AuditVCForTable: UIViewController, UIGestureRecognizerDelegate {
     
     var viewModel: AuditViewModel?
-    var categoryIndex = Int()
-    var categoryNameArr = [String]()
-    var jsonObj = JSON()
-    var myCustomView = UIView()
+    var categoryIndex: Int = 0
+    
     var response: Response? {
         return self.viewModel?.response
     }
@@ -27,7 +25,6 @@ class AuditVCForTable: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         
         configure()
-        
     }
     
     func configure() {

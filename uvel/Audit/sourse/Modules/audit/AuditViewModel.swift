@@ -22,11 +22,17 @@ class AuditViewModel {
             getDataHandler?(response)
         }
     }
-    var coordX: Int = 15
-    
+    var coordX: Int = AuditConstraints.leftIndentOfCV
+    var lastId: Int = 0
+    var filteredSearchData: [String]!
     // AuditPageViewController vars
     
-    var controllers = [AuditVCForTable]()
+    
+    
+    //AuditVCForTable vars
+    
+
+    
 }
 
 //AuditWrapperViewController functions
@@ -39,6 +45,17 @@ extension AuditViewModel {
         }
     }
     
+    func calculateSize(id: Int, cellWidthArr: [CGFloat]) {
+        var x = AuditConstraints.leftIndentOfCV
+        if id != 0 {
+            for i in 0 ... id - 1 {
+                x += Int(cellWidthArr[i] + AuditConstraints.collectionMinimumInteritemSpacingForSection)
+            }
+            coordX = x
+        } else {
+            coordX = AuditConstraints.leftIndentOfCV
+        }
+    }
     
     
 }

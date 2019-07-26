@@ -19,23 +19,20 @@ class AuditVCForTable: UIViewController, UIGestureRecognizerDelegate {
         return self.viewModel?.response
     }
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+            
+            tableView.register(UINib(nibName: "AuditTableViewCell", bundle: nil), forCellReuseIdentifier: "AuditTableViewCellID")
+            tableView.register(UINib(nibName: "AuditSectionTableView", bundle: nil), forHeaderFooterViewReuseIdentifier: "AuditSectionTableViewID")
+            tableView.tableFooterView = UIView(frame: .zero)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTableView()
-    }
-    
-    func configureTableView() {
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.register(UINib(nibName: "AuditTableViewCell", bundle: nil), forCellReuseIdentifier: "AuditTableViewCellID")
-        tableView.register(UINib(nibName: "AuditSectionTableView", bundle: nil), forHeaderFooterViewReuseIdentifier: "AuditSectionTableViewID")
-        tableView.tableFooterView = UIView(frame: .zero)
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
 }

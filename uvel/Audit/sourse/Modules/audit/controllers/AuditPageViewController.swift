@@ -23,7 +23,7 @@ class AuditPageViewController: UIPageViewController {
         super.viewDidLoad()
         delegate = self
         dataSource = self
-        self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width + 40, height: self.view.frame.height)
+        self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width) + AuditConstraints.sizeBetweenScreen, height: Int(self.view.frame.height))
     }
     
     func setControllers(count: Int, viewModel: AuditViewModel) {

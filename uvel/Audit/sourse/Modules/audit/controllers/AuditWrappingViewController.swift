@@ -23,7 +23,7 @@ class AuditWrappingViewController: UIViewController {
     }()
     
     var cellWidthArr = [CGFloat](){
-        didSet{
+        didSet {
             setupHorizontalBar(itemNumber: 0)
         }
     }
@@ -47,6 +47,10 @@ class AuditWrappingViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        pageViewController.view.frame = view.bounds
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +63,16 @@ class AuditWrappingViewController: UIViewController {
         
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    func setupCollectionView() {
+        let schema = viewModel.response.data.schema
+        schema.enumerated().forEach({
+            if let categoryName = $0.element.categoryName {
+                let width = categoryName.width(withConstrainedHeight: AuditConstraints.collectionCellHeight, font: UIFont.systemFont(ofSize: 17))
+                self.cellWidthArr.append(width)
+            }
+        })
     }
     
     func initController(index: Int) -> AuditVCForTable {
@@ -77,10 +91,8 @@ class AuditWrappingViewController: UIViewController {
         
         viewModel.calculateSizeHandler = { (id, coord) in
             self.viewModel.coordX = coord
-            self.scrollToNextCell(id: id)
+            self.scrollToNextCell(withId: id)
         }
-        
-        
     }
     
     func setupHorizontalBar(itemNumber: Int) {
@@ -105,7 +117,7 @@ extension AuditWrappingViewController: UICollectionViewDelegate, UICollectionVie
         colectionView.selectItem(at: viewModel.selectedIndexPath as IndexPath, animated: false, scrollPosition: [])
     }
     
-    func scrollToNextCell(id: Int) {
+    func scrollToNextCell(withId id: Int) {
         if let coll = colectionView {
             let indexPath = IndexPath(row: id, section: 0)
             coll.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
@@ -146,7 +158,7 @@ extension AuditWrappingViewController: UICollectionViewDelegate, UICollectionVie
         colectionView.cellForItem(at: lastIndexPath)?.isSelected = false
         viewModel.lastId = indexPath.item
         goToScreenDelegate?.GoToScreen(screenNumber: indexPath.item)
-        scrollToNextCell(id: indexPath.item)
+        scrollToNextCell(withId: indexPath.item)
     }
 }
 
@@ -162,7 +174,12 @@ extension AuditWrappingViewController: swipePCDelegate {
         colectionView.cellForItem(at: lastIndexPath)?.isSelected = false
         colectionView.cellForItem(at: indexPath)?.isSelected = true
         viewModel.lastId = id
-        scrollToNextCell(id: id)
+        scrollToNextCell(withId: id)
     }
+    
+}
+
+
+class CategoryCollectionView {
     
 }

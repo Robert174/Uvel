@@ -25,5 +25,4 @@ class AuditWireframe {
             fatalError()
         }
     }
-    
 }

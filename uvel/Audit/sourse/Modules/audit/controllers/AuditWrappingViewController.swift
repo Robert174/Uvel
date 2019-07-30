@@ -22,14 +22,7 @@ class AuditWrappingViewController: UIViewController {
         return pageViewController
     }()
     
-    var cellWidthArr = [CGFloat](){
-        didSet {
-            setupHorizontalBar(itemNumber: 0)
-        }
-    }
-    let horizontalBarView = UIView()
     var goToScreenDelegate: GoToScreenDelegate?
-    
 
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var viewForTable: UIView! {
@@ -40,9 +33,9 @@ class AuditWrappingViewController: UIViewController {
             self.viewForTable.addSubview(pageViewController.view)
         }
     }
-    @IBOutlet weak var colectionView: UICollectionView!
+    @IBOutlet weak var colectionView: CategoryCollectionView!
     @IBOutlet weak var sendButton: UIButton!{
-        didSet{
+        didSet {
             self.sendButton.layer.cornerRadius = 10
         }
     }
@@ -65,16 +58,6 @@ class AuditWrappingViewController: UIViewController {
         self.navigationItem.hidesSearchBarWhenScrolling = false
     }
     
-    func setupCollectionView() {
-        let schema = viewModel.response.data.schema
-        schema.enumerated().forEach({
-            if let categoryName = $0.element.categoryName {
-                let width = categoryName.width(withConstrainedHeight: AuditConstraints.collectionCellHeight, font: UIFont.systemFont(ofSize: 17))
-                self.cellWidthArr.append(width)
-            }
-        })
-    }
-    
     func initController(index: Int) -> AuditVCForTable {
         let controller = storyboard?.instantiateViewController(withIdentifier: "AuditVCForTableID") as! AuditVCForTable
         controller.categoryIndex = index
@@ -87,28 +70,17 @@ class AuditWrappingViewController: UIViewController {
             guard let self = self else {return}
             self.pageViewController.setControllers(count: response.data.schema.count, viewModel: self.viewModel)
             self.initColectionView()
+            self.colectionView.categoryNames = self.viewModel.getCategoriesName()
         }
         
         viewModel.calculateSizeHandler = { (id, coord) in
             self.viewModel.coordX = coord
-            self.scrollToNextCell(withId: id)
+            self.colectionView.scrollToNextCell(withId: id)
         }
     }
-    
-    func setupHorizontalBar(itemNumber: Int) {
-        viewModel.calculateSize(id: itemNumber, cellWidthArr: cellWidthArr)
-        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
-        horizontalBarView.backgroundColor = AuditColors.selectedColor
-        let width = cellWidthArr[itemNumber]
-        horizontalBarView.frame = CGRect(x: viewModel.coordX, y: 45, width: Int(width) + AuditConstraints.horizontalBarIndent, height: AuditConstraints.horizontalBarHeight)
-        colectionView.addSubview(horizontalBarView)
-    }
-    
 }
 
 extension AuditWrappingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    
     
     func initColectionView() {
         colectionView.showsHorizontalScrollIndicator = false
@@ -117,21 +89,9 @@ extension AuditWrappingViewController: UICollectionViewDelegate, UICollectionVie
         colectionView.selectItem(at: viewModel.selectedIndexPath as IndexPath, animated: false, scrollPosition: [])
     }
     
-    func scrollToNextCell(withId id: Int) {
-        if let coll = colectionView {
-            let indexPath = IndexPath(row: id, section: 0)
-            coll.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        if let categoryName = viewModel.response.data.schema[indexPath.row].categoryName {
-            let width = categoryName.width(withConstrainedHeight: AuditConstraints.collectionCellHeight, font: UIFont.systemFont(ofSize: 17))
-            self.cellWidthArr.append(width)
-            return CGSize(width: width, height: AuditConstraints.collectionCellHeight)
-        }
-        return .zero
+        return colectionView.getSizeForItem(atIndexPath: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -143,43 +103,19 @@ extension AuditWrappingViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = colectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoriesCollectionViewCell
-        cell.categoryNameLabel.text = viewModel.response.data.schema[indexPath.row].categoryName
-        
+        let cell = self.colectionView.createCollectionCell(atIndexPath: indexPath)
+    
         return cell
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let lastIndexPath = IndexPath(row: viewModel.lastId, section: 0)
-        setupHorizontalBar(itemNumber: indexPath.item)
-        colectionView.cellForItem(at: indexPath)?.isSelected = true
-        colectionView.cellForItem(at: lastIndexPath)?.isSelected = false
-        viewModel.lastId = indexPath.item
+        self.colectionView.newItemSelected(atIndexPath: indexPath)
         goToScreenDelegate?.GoToScreen(screenNumber: indexPath.item)
-        scrollToNextCell(withId: indexPath.item)
     }
 }
-
 
 extension AuditWrappingViewController: swipePCDelegate {
-    
     func didSwiped(id: Int) {
-        
-        let indexPath = IndexPath(row: id, section: 0)
-        let lastIndexPath = IndexPath(row: viewModel.lastId, section: 0)
-        
-        setupHorizontalBar(itemNumber: id)
-        colectionView.cellForItem(at: lastIndexPath)?.isSelected = false
-        colectionView.cellForItem(at: indexPath)?.isSelected = true
-        viewModel.lastId = id
-        scrollToNextCell(withId: id)
+        colectionView.didSwiped(id: id)
     }
-    
-}
-
-
-class CategoryCollectionView {
-    
 }

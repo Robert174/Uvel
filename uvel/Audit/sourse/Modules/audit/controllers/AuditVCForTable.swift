@@ -15,9 +15,6 @@ class AuditVCForTable: UIViewController, UIGestureRecognizerDelegate {
     var viewModel: AuditViewModel?
     var categoryIndex: Int = 0
     
-    var response: Response? {
-        return self.viewModel?.response
-    }
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -34,9 +31,7 @@ class AuditVCForTable: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         
     }
-    
 }
-
 
 
 extension AuditVCForTable: UITableViewDelegate, UITableViewDataSource {
@@ -54,12 +49,13 @@ extension AuditVCForTable: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (self.response?.data.schema[categoryIndex].tradeMarks!.count ?? 0)
+        return viewModel!.getCountOfTradeMarksInCategory(with: categoryIndex)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (response?.data.schema[categoryIndex].tradeMarks![section].opened)! {
-            return (response?.data.schema[categoryIndex].tradeMarks![section].products.count)!
+        let tradeMark = viewModel!.getTradeMark(InCategory: categoryIndex, InSection: section)
+        if (tradeMark.opened) {
+            return (tradeMark.products.count)
         } else {
             return 0
         }
@@ -67,26 +63,27 @@ extension AuditVCForTable: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "AuditSectionTableViewID") as! AuditSectionTableView
+        let tradeMarkModel = viewModel?.getTradeMark(InCategory: categoryIndex, InSection: section)
         sectionView.delegate = self
-        sectionView.label.text = self.response?.data.schema[categoryIndex].tradeMarks![section].tradeMarkName
+        sectionView.label.text = tradeMarkModel!.tradeMarkName
         sectionView.tag = section
-        sectionView.separatedLine.isHidden = !(response?.data.schema[categoryIndex].tradeMarks![sectionView.tag].opened)!
-        if (response?.data.schema[categoryIndex].tradeMarks![sectionView.tag].opened)! {
+        sectionView.separatedLine.isHidden = !(viewModel?.getTradeMark(InCategory: categoryIndex, InSection: sectionView.tag).opened)!
+        if (viewModel?.getTradeMark(InCategory: categoryIndex, InSection: sectionView.tag).opened)! {
             sectionView.disclosureButton.setImage(UIImage(named: "collapse.png"), for: .normal)
         } else {
             sectionView.disclosureButton.setImage(UIImage(named: "expand.png"), for: .normal)
         }
-        
         return sectionView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AuditTableViewCellID", for: indexPath) as! AuditTableViewCell
         
-        let cellModel = self.response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row]
+        let cellModel = viewModel?.getProduct(inCategory: categoryIndex, inSection: indexPath.section, inRow: indexPath.row)
+        
         cell.label.text = cellModel?.productName
-        if !(response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row].opened)! {
-            response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row].switchOn = false
+        if !(cellModel?.opened)! {
+            cellModel!.switchOn = false
         }
         
         cell.stackView.isHidden = !cellModel!.opened
@@ -107,15 +104,16 @@ extension AuditVCForTable: myTableDelegate {
     
     func myTableDelegate(section: AuditSectionTableView) {
         let sections = IndexSet.init(integer: section.tag)
-        if (response?.data.schema[categoryIndex].tradeMarks![section.tag].opened)! {
+        let tradeMarkModel = viewModel!.getTradeMark(InCategory: categoryIndex, InSection: section.tag)
+        if (tradeMarkModel.opened) {
             section.disclosureButton.setImage(UIImage(named: "collapse.png"), for: .normal)
-            response?.data.schema[categoryIndex].tradeMarks![section.tag].opened = false
-            for elem in 0 ... (response?.data.schema[categoryIndex].tradeMarks![section.tag].products.count)! - 1 {
-                response?.data.schema[categoryIndex].tradeMarks![section.tag].products[elem].opened = false
-                response?.data.schema[categoryIndex].tradeMarks![section.tag].products[elem].switchOn = false
+            tradeMarkModel.opened = false
+            for elem in 0 ... (tradeMarkModel.products.count) - 1 {
+                tradeMarkModel.products[elem].opened = false
+                tradeMarkModel.products[elem].switchOn = false
             }
         } else {
-            response?.data.schema[categoryIndex].tradeMarks![section.tag].opened = true
+            tradeMarkModel.opened = true
             section.disclosureButton.setImage(UIImage(named: "expand.png"), for: .normal)
         }
         tableView.reloadSections(sections, with: .fade)
@@ -129,9 +127,11 @@ extension AuditVCForTable: resizeCellDelegate {
     func resizeCellDelegate(cell: AuditTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         
-        let value = response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row].opened
+        let productModel = viewModel?.getProduct(inCategory: categoryIndex, inSection: indexPath.section, inRow: indexPath.row)
         
-        response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row].opened = !value!
+        let value = productModel!.opened
+        
+        productModel!.opened = !value
         
         tableView.beginUpdates()
         tableView.reloadRows(at: [indexPath], with: .fade)
@@ -147,9 +147,11 @@ extension AuditVCForTable: switchValueDidChangedDelegate {
     func switchValueDidChangedDelegate(cell: AuditTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         
-        let value = response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row].switchOn
+        let productModel = viewModel?.getProduct(inCategory: categoryIndex, inSection: indexPath.section, inRow: indexPath.row)
         
-        response?.data.schema[categoryIndex].tradeMarks![indexPath.section].products[indexPath.row].switchOn = !value!
+        let value = productModel!.switchOn
+        
+        productModel!.switchOn = !value
         
         tableView.beginUpdates()
         tableView.reloadRows(at: [indexPath], with: .fade)
